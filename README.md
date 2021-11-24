@@ -6,6 +6,8 @@ This is a research-oriented codebase, which has been published for the purposes 
 
 The code is not intended for production use and does not represent a particularly clean or simple way of implementing the methods described in the above paper. The code contains numerous feature flags and parameters (see `codegen/parameter_definitions.c`) that are not used in the HybVIO but may (or may not) be relevant in other scenarios and use cases.
 
+![HybVIO EuRoC](https://spectacularai.github.io/docs/gif/HybVIO.gif)
+
 ## Setup
 
 Here are basic instructions for setting up the project, there is some more detailed help included in the later sections (e.g., for Linux).
