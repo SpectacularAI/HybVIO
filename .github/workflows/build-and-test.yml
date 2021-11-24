@@ -1,0 +1,47 @@
+name: Build and run unit tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install OpenGL libraries (Mesa)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mesa-common-dev libglfw3-dev
+    - name: Write git submodule status to file
+      run: |
+        git submodule status > .gitSubmoduleStatus
+    - name: Cache other libs
+      id: cache_libs
+      uses: actions/cache@v1
+      with:
+        path: 3rdparty/mobile-cv-suite/build
+        key: mobile-cv-suite-build-${{ hashFiles('.gitSubmoduleStatus') }}
+    - name: Build dependencies
+      if: steps.cache_libs.outputs.cache-hit != 'true'
+      run: |
+        cd 3rdparty
+        git submodule update --init --recursive -- mobile-cv-suite
+        cd mobile-cv-suite
+        DO_CLEAR=OFF USE_SLAM=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+        cp mobile-cv-suite-config.cmake build/
+        cp -R jsonl-recorder/Catch2/single_include/catch2 build/
+    - name: Handle catch2 symlink
+      run: |
+        cd test
+        rm catch2
+        ln -s ../3rdparty/mobile-cv-suite/build/catch2 .
+    - name: CMake build
+      run: |
+        if [ -f 3rdparty/mobile-cv-suite/build/mobile-cv-suite-config.cmake ]; then cp -f 3rdparty/mobile-cv-suite/build/mobile-cv-suite-config.cmake 3rdparty/mobile-cv-suite/; fi
+        mkdir target
+        cd target
+        CC=clang CXX=clang++ cmake -DUSE_SLAM=OFF -DBUILD_VISUALIZATIONS=OFF ..
+        make -j4
+    - name: Run tests
+      run: |
+        cd target
+        ./run-tests

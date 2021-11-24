@@ -1,0 +1,6 @@
+[submodule "3rdparty/mobile-cv-suite"]
+	path = 3rdparty/mobile-cv-suite
+	url = https://github.com/AaltoML/mobile-cv-suite.git
+[submodule "src/slam"]
+	path = src/slam
+	url = https://github.com/SpectacularAI/SLAM-module.git

@@ -1,0 +1,13 @@
+/build
+/data
+target*
+*.mov
+*.png
+.idea/
+cmake-build-debug/
+.vscode
+.viscid
+__pycache__/
+*.pyc
+.python-version
+codegen/output

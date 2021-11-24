@@ -1,0 +1,372 @@
+{
+  "main": [
+    {
+      "name": "inputPath",
+      "short": "i",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "input video path"
+    },
+    {
+      "name": "outputPath",
+      "short": "o",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "VIO output JSONL path. See also `-outputJsonExtras`."
+    },
+    {
+      "name": "outputType",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "extra output for `-outputPath` CSV format. Options: '', 'tail'"
+    },
+    {
+      "name": "recordingPath",
+      "short": "r",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "recording JSONL path"
+    },
+    {
+      "name": "videoRecordingPath",
+      "short": "vr",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "recording video path"
+    },
+    {
+      "name": "parametersPath",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "override parameters.txt"
+    },
+    {
+      "name": "calibrationPath",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "override calibration.json"
+    },
+    {
+      "name": "pointCloudOutputPath",
+      "short": "pc",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "point cloud CSV output path"
+    },
+    {
+      "name": "slamMapPosesPath",
+      "data_type": "std::string",
+      "default": "",
+      "doc": "Final SLAM map poses output CSV path"
+    },
+    {
+      "name": "displayVideo",
+      "short": "c",
+      "data_type": "bool",
+      "default": "true",
+      "doc": "show video with odometry and/or tracker visualizations"
+    },
+    {
+      "name": "displayPose",
+      "short": "p",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show odometry xy position in a window"
+    },
+    {
+      "name": "visuUpdateInterval",
+      "short": "ui",
+      "data_type": "int",
+      "default": "1",
+      "doc": "update visualizations every Nth frame"
+    },
+    {
+      "name": "windowResolution",
+      "data_type": "double",
+      "default": "1000",
+      "doc": "max. dimension of the video window. Use 0 to display in algorithm width"
+    },
+    {
+      "name": "datasetVideoIndex",
+      "short": "j",
+      "data_type": "int",
+      "default": "-1",
+      "doc": "index of ADVIO video to use as input (1-23)"
+    },
+    {
+      "name": "logLevel",
+      "short": "v",
+      "data_type": "int",
+      "default": "1",
+      "doc": "log level (-2,-1,...,9)"
+    },
+    {
+      "name": "stepMode",
+      "short": "step",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "start video playback paused"
+    },
+    {
+      "name": "targetFrameWidth",
+      "short": "width",
+      "data_type": "int",
+      "default": "1280",
+      "doc": "algorithm image width (longer side)"
+    },
+    {
+      "name": "targetFrameWidthUpsample",
+      "short": "width",
+      "data_type": "int",
+      "default": "-1",
+      "doc": "algorithm image width (longer side), allowing upsampling. overrides -targetFrameWidth"
+    },
+    {
+      "name": "maxFrames",
+      "short": "frames",
+      "data_type": "int",
+      "default": "-1",
+      "doc": "process only this many frames"
+    },
+    {
+      "name": "gpu",
+      "short": "gpu",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Enable OpenGL GPU processing"
+    },
+    {
+      "name": "displayCorrelation",
+      "short": "corr",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show KF covariance correlation in a window"
+    },
+    {
+      "name": "displayCovarianceMagnitude",
+      "short": "magn",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show KF covariance magnitude in a window"
+    },
+    {
+      "name": "displayPointCloud",
+      "short": "showPc",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show point cloud history. requires -p=true"
+    },
+    {
+      "name": "displayImuSamples",
+      "short": "showImu",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show IMU sample graph"
+    },
+    {
+      "name": "displayStereoMatching",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show stereo matching visualization"
+    },
+    {
+      "name": "displayStereoDisparity",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show stereo disparity (computed using OpenCV). Requires also -useRectification and -useStereo"
+    },
+    {
+      "name": "displayStereoDepth",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show single-frame stereo depth (computed using OpenCV). Requires also -useRectification and -useStereo"
+    },
+    {
+      "name": "displayTracks",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show active odometry tracks. requires -c"
+    },
+    {
+      "name": "displayTracksAll",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show all odometry tracks. requires -c"
+    },
+    {
+      "name": "displayOpticalFlow",
+      "short": "flow",
+      "enum": ["NONE", "PREDICT", "COMPARE", "FAILURES"],
+      "data_type": "odometry::OpticalFlowVisualization",
+      "default": "NONE",
+      "doc": "show optical flow. requires -c"
+    },
+    {
+      "name": "displayCornerMeasure",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show tracker corner measure for each pixel"
+    },
+    {
+      "name": "displayStereoEpipolarCurves",
+      "enum": ["NONE", "TRACKED", "DETECTED", "FAILED"],
+      "data_type": "odometry::StereoEpipolarVisualization",
+      "default": "NONE",
+      "doc": "show feature location prediction based on epipolar geometry. Requires -useStereo and -c."
+    },
+    {
+      "name": "displayPlainVideo",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "display video without any debug visualizations"
+    },
+    {
+      "name": "visualUpdateViewer",
+      "short": "vu",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "show 3D visualization of visual updates"
+    },
+    {
+      "name": "timer",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "time algorithm functions"
+    },
+    {
+      "name": "skipOpenGlCleanup",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "skip cleanup of accelerated-arrays OpenGL things to check nothing breaks"
+    }
+  ],
+  "viewer": [
+    {
+      "name": "viewerPaused",
+      "data_type": "bool",
+      "default": "false"
+    },
+    {
+      "name": "followCamera",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showGrid",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showKeyframes",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showGraph",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showOdometryPoses",
+      "data_type": "bool",
+      "default": "false"
+    },
+    {
+      "name": "showMps",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showStereoPc",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showLocalMap",
+      "data_type": "bool",
+      "default": "false"
+    },
+    {
+      "name": "showLoops",
+      "data_type": "bool",
+      "default": "true"
+    },
+    {
+      "name": "showLoopCandidates",
+      "data_type": "bool",
+      "default": "false"
+    },
+    {
+      "name": "normalColors",
+      "data_type": "bool",
+      "default": "false"
+    },
+    {
+      "name": "naturalColors",
+      "data_type": "bool",
+      "default": "false"
+    },
+    {
+      "name": "frameSize",
+      "data_type": "float",
+      "default": "0.2"
+    },
+    {
+      "name": "mpSize",
+      "data_type": "float",
+      "default": "1.2"
+    },
+    {
+      "name": "theme",
+      "data_type": "int",
+      "default": "0"
+    }
+  ],
+  "slam": [
+    {
+      "name": "displayViewer",
+      "short": "s",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Show Pangolin window for 3D visualizations. Requires -useSlam=true."
+    },
+    {
+      "name": "displayKeyframe",
+      "short": "kf",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Show SLAM keyframe visualization. Requires -useSlam=true."
+    },
+    {
+      "name": "visualizeOrbMatching",
+      "short": "orb",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Show a separate visualization window with ORB matching between the latest keyframes"
+    },
+    {
+      "name": "visualizeLoopOrbMatching",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Select visualizing ORB matching between the latest keyframes and ORB matches for loop closures. Requires slam.visualizeOrbMatching = true"
+    },
+    {
+      "name": "visualizeMapPointSearch",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Visualize map point search via projection for new keyframes."
+    },
+    {
+      "name": "visualizeOrbPyramid",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Visualize ORB image pyramid on keyframe."
+    },
+    {
+      "name": "visualizeOrbs",
+      "data_type": "bool",
+      "default": "false",
+      "doc": "Visualize raw ORB data on the keyframe"
+    }
+  ]
+}
