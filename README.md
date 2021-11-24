@@ -2,9 +2,12 @@
 
 **A visual-inertial odometry system with an optional SLAM module**.
 
-This is a research-oriented codebase, which has been published for the purposes of verifiability and reproducibility of the results in https://arxiv.org/abs/2106.11857. It can also serve as a baseline in VIO and VISLAM benchmarks.
+This is a research-oriented codebase, which has been published for the purposes of verifiability and reproducibility of the results in the paper:
 
-The code is not intended for production use and does not represent a particularly clean or simple way of implementing the methods described in the above paper. The code contains numerous feature flags and parameters (see `codegen/parameter_definitions.c`) that are not used in the HybVIO but may (or may not) be relevant in other scenarios and use cases.
+* Otto Seiskari, Pekka Rantalankila, Juho Kannala, Jerry Ylilammi, Esa Rahtu, and Arno Solin (2022). **HybVIO: Pushing the limits of real-time visual-inertial odometry**. In *IEEE Winter Conference on Applications of Computer Vision (WACV)*.  
+[[arXiv pre-print]](https://arxiv.org/abs/2106.11857) | [[video]](https://youtu.be/8V_EGJrPHeA)
+
+It can also serve as a baseline in VIO and VISLAM benchmarks. The code is not intended for production use and does not represent a particularly clean or simple way of implementing the methods described in the above paper. The code contains numerous feature flags and parameters (see `codegen/parameter_definitions.c`) that are not used in the HybVIO but may (or may not) be relevant in other scenarios and use cases.
 
 ![HybVIO EuRoC](https://spectacularai.github.io/docs/gif/HybVIO.gif)
 
