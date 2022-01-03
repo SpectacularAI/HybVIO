@@ -63,7 +63,7 @@ Then inside the `target/` folder use, e.g.:
 
     ./main -i=../data/benchmark/euroc-v1-02-medium -p -useStereo
 
-In general, to run the algorithm on recorded data, use `./main -i=path/to/datafolder`, where `datafolder/` must at the very least contain a `data.{jsonl|csv}` and `data.{mp4|mov|avi}`. Such recordings can be created with
+In general, to run the algorithm on recorded data, use `./main -i=path/to/datafolder`, where `datafolder/` must at the very least contain a `data.{jsonl|csv}`, `data.{mp4|mov|avi}`, and `parameters.txt` (sensor data, camera data, and camera calibration). Read about the formats [here](https://github.com/AaltoML/vio_benchmark/tree/98559272f59af35bb88bd63cc5cfc16e82a99bb3#benchmark-data-format). Such recordings can be created with
 
  * [Android VIO tester](https://github.com/AaltoML/android-viotester)
  * [realsense-capture](https://github.com/AaltoVision/realsense-capture)
