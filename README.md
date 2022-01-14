@@ -38,6 +38,23 @@ Now the `target` folder should contain the binaries `main` and `run-tests`. Afte
 
 To compile faster, pass `-j` argument to `make`, or use a program like `ccache`. To run faster, check `CMakeLists.txt` for some options.
 
+### Troubleshooting: disabling GPU visualizations and acceleration
+
+If you see error messages related to OpenGL or GLFW, try building without visualizations
+
+```bash
+cd 3rdparty/mobile-cv-suite && BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+cd ../..; mkdir -p target; cd target
+cmake -DBUILD_VISUALIZATIONS=OFF -DUSE_SLAM=ON ..
+```
+or without any GPU support
+
+```bash
+cd 3rdparty/mobile-cv-suite && WITH_OPENGL=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+cd ../..; mkdir -p target; cd target
+cmake -DBUILD_VISUALIZATIONS=OFF -DBUILD_WITH_GPU=OFF -DUSE_SLAM=ON ..
+```
+
 ### Arch Linux
 
 List of packages needed: clang, cmake, ffmpeg, glfw, gtk3
