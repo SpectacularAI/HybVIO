@@ -293,10 +293,7 @@ struct VisualizationHelperImplementation : VisualizationHelper, private PoseOver
     {
         assert(inputColorFrame->width == size.width && inputColorFrame->height == size.height);
 
-        if (outputFrame.empty()) {
-            // try to init gpu visualizer
-            assert(false && "GPU visualizer not supported");
-        }
+        accelerated::opencv::copy(*inputColorFrame, outputFrame);
 
         auto taggedFrame = std::make_unique<odometry::TaggedFrame>();
         taggedFrame->tag = tag;
